@@ -16,7 +16,13 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Despesas Pessoais')),
+      appBar: AppBar(
+        title: Text('Despesas Pessoais'),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.add), onPressed: () {  }
+        )
+      ],
+    ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -32,6 +38,11 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
