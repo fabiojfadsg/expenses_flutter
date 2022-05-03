@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, unused_element
 
 import 'package:flutter/material.dart';
 import 'package:expenses_flutter/models/transaction.dart';
@@ -32,9 +32,8 @@ class Chart extends StatelessWidget {
         'day': DateFormat.E().format(weekday)[0],
         'value': totalSum,
       };
-    });
+    }).reversed.toList();
   }
-
 
   double get _weekTotalValue{
     return groupedTransations.fold(0.0, (sum, tr) {
@@ -48,14 +47,21 @@ class Chart extends StatelessWidget {
     return Card(
         elevation: 6,
         margin: const EdgeInsets.all(20),
-        child: Row(
-          children: groupedTransations.map((tr) {
-            return ChartBar(tr,
-              label: tr['day'] as String,
-              value: tr['value'] as double,
-              percentage: (tr['percentage'] as double),
-            );
-          }).toList(),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: groupedTransations.map((tr) {
+              return Flexible(
+                fit: FlexFit.tight,
+                child: ChartBar(tr,
+                  label: tr['day'] as String,
+                  value: tr['value'] as double,
+                  percentage: (tr['percentage'] as double),
+                ),
+              );
+            }).toList(),
+          ),
         ));
   }
 }
