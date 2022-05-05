@@ -31,6 +31,7 @@ class Chart extends StatelessWidget {
       return {
         'day': DateFormat.E().format(weekday)[0],
         'value': totalSum,
+        'percentage': totalSum / recentTransation.length,
       };
     }).reversed.toList();
   }
@@ -57,7 +58,8 @@ class Chart extends StatelessWidget {
                 child: ChartBar(tr,
                   label: tr['day'] as String,
                   value: tr['value'] as double,
-                  percentage: _weekTotalValue == 0 ? 0 : ((tr['percentage'] as double) ~/ _weekTotalValue).truncate().toDouble()
+                  percentage: _weekTotalValue == 0.0 ?
+                  0.0 : ((tr['percentage'] as double)) / _weekTotalValue,
                 ),
               );
             }).toList(),
